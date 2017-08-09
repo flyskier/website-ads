@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+.page{position:fixed;_position:absolute;right:0;bottom:0;}
+.ad {border: 1px solid #bfbfbf; display:none;  bottom:-220px;display:none;height: 220px;position: absolute;right: 1px;width: 300px; z-index: 20000;}
+.ad h2 {margin:0px;   height: 25px; line-height: 25px; padding-left: 10px; font-size: 14px; color: #333; background: url(title_bg.gif) repeat-x; border-bottom: 1px solid #aaaaaa; position: relative; }
+.ad .min,.ad .max,.ad .close  { width: 21px; height: 20px; position: absolute; top: 2px;  }
+.ad .min{ background: url(min.gif) no-repeat 0 bottom;right: 25px;}
+.ad .min:hover { background: url(min.gif) no-repeat 0 0; }
+.ad .max { background: url(max.gif) no-repeat 0 bottom; right: 25px; }
+.ad .max:hover { background: url(max.gif) no-repeat 0 0; }
+.ad .close { background: url(close.gif) no-repeat 0 bottom; right: 3px; }
+.ad .close:hover { background: url(close.gif) no-repeat 0 0; }
+.ad .content { height:195px; width:300px; overflow: hidden; font-size: 14px; line-height: 18px; color: #666; background:#eeeeee;  }
+.ad .wrap { padding:0 }
+.ad p{line-height:20px; font-size:14px; margin:0px;text-indent:2em; }
+.ad .endesc{padding:10px 0px }
+</style>
+<script type="text/javascript" src="move.js"></script>
+<script type="text/javascript">
+window.onload=function ()
+{
+	var oBox=document.getElementById('ad_box');
+	var oBtnClose=document.getElementById('btn_close');
+	var oBtnMin=document.getElementById('btn_min');
+	var initBoxBottom=parseInt(getStyle(oBox, 'bottom'));
+
+	oBox.style.display='block';
+	startMove(oBox, {bottom: 0});
+
+	oBtnClose.onclick=function ()
+	{
+		startMove(oBox, {bottom: initBoxBottom}, function (){
+			oBox.style.display='none';
+		});
+	};
+	oBtnMin.onclick=function ()
+	{
+		var turnoff= oBtnMin.className == 'max' ? true : false;
+		if(turnoff)
+		{
+			oBox.style.display='block';
+			startMove(oBox, {bottom: 0});
+		}
+		else
+		{
+			var boxBottom=initBoxBottom+25;
+			startMove(oBox, {bottom: boxBottom}, function (){
+				oBox.style.display='none';
+			});
+		}
+		oBtnMin.className = oBtnMin.className == 'min' ? 'max' : 'min';
+	};
+};
+</script>
+</head>
+<body>
+<div class="page">
+<div class="ad" id="ad_box" >
+  <h2> <b>广告</b> <a id="btn_min" href="javascript:;" class="min"></a> <a id="btn_close" href="javascript:;" class="close"></a> </h2>
+  <div class="content">
+    <div class="wrap"> 
+    	<p>请戳这里</a>
+        </p>
+		<p class="endesc">
+		click here.</a>
+        </p>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>
